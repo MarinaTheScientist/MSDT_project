@@ -27,6 +27,10 @@
 
 Создал ветку `pr-test` и смог ее запушить потому, что правило нацелено только на `default branch`.
 
+![Screenshot_438.png](imgs/Screenshot_438.png)
+*Создал запрос на слияние.*
 
+![Screenshot_439.png](imgs/Screenshot_439.png)
+*Выполнил команду `git pull`.*
 
 
