@@ -21,7 +21,7 @@ MyString::MyString(const MyString &other){
 }
 
 void MyString::set_new_string(const char *str){
-    delete this->str;
+    delete[] this->str;
     this->str = new char[strlen(str)+1];
     strcpy(this->str, str);
 }
@@ -63,7 +63,7 @@ void MyString::read_line(){
             delete[] str;
             str = temp;
             n *= 2;
-        }        
+        }
     }
     str[i] = '\0';
     this->str = str;

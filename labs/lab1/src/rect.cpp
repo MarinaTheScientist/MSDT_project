@@ -50,19 +50,15 @@ Rect::~Rect(){
 }
 
 int Rect::get_top(){
-    cout << "Вызов метода get_top для адреса: " << this << "\n";
     return y + height;
 }
 int Rect::get_left(){
-    cout << "Вызов метода get_left для адреса: " << this << "\n";
     return x;
 }
 int Rect::get_bottom(){
-    cout << "Вызов метода get_bottom для адреса: " << this << "\n";
     return y;
 }
 int Rect::get_right(){
-    cout << "Вызов метода get_right для адреса: " << this << "\n";
     return x + width;
 }
 // int Rect::get_x(){
@@ -123,8 +119,8 @@ void Rect::inflate(int dw, int dh){
 void Rect::inflate(int d_bottom, int d_top, int d_left, int d_right){
     this->x -= d_left;
     this->y -= d_bottom;
-    this->width += 2*d_left;
-    this->height += 2*d_right;
+    this->width += d_left + d_right;
+    this->height += d_bottom + d_top;
 }
 
 // void Rect::move(int dx, int dy = 0){

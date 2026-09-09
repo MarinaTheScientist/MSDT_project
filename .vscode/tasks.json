@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-debug",
+            "type": "shell",
+            "command": "make",
+            "options": { "cwd": "${workspaceFolder}/labs/lab1" },
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "./build/debug.exe",
+            "options": { "cwd": "${workspaceFolder}/labs/lab1" },
+            "dependsOn": "build-debug",
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "make test",
+            "options": { "cwd": "${workspaceFolder}/labs/lab1" },
+            "group": { "kind": "test", "isDefault": true },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "leaks",
+            "type": "shell",
+            "command": "make leaks",
+            "options": { "cwd": "${workspaceFolder}/labs/lab1" },
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean",
+            "options": { "cwd": "${workspaceFolder}/labs/lab1" },
+            "problemMatcher": []
+        }
+    ]
+}
