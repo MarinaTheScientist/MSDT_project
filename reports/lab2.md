@@ -13,6 +13,19 @@
 
 Файл .gitignore — это текстовый файл, в котором перечисляются шаблоны имен файлов и папок, которые Git не должен отслеживать. Он нужен, чтобы не засорять репозиторий временными или личными файлами. Он работает, фильтруя файлы при git status и git add. [(Источник)](https://ru.stackoverflow.com/questions/546520/%D0%94%D0%BB%D1%8F-%D1%87%D0%B5%D0%B3%D0%BE-%D0%BD%D1%83%D0%B6%D0%B5%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB-gitignore)
 
+Создал файл .gitignore:
+````
+build/
+out/
+bin/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
+.vscode/
+.idea/
+````
 
 ## Защита веток
 
@@ -38,3 +51,9 @@
 
 
 ## Code Review 
+
+````git
+git branch prog-lab1
+git push -u origin prog-lab1
+git checkout prog-lab1
+````
