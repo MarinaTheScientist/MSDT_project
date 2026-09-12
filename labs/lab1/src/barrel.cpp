@@ -21,7 +21,7 @@ void Barrel::pour_from(Barrel &sourse){
     sourse.water_vol -= wat_cup;
     sourse.volume -= amount;
 
-    this->alcohol_vol += alc_cup;
-    this->water_vol += wat_cup;
-    this->volume += amount;
+    alcohol_vol += alc_cup;
+    water_vol += wat_cup;
+    volume += amount;
 }

@@ -8,3 +8,4 @@ cmake-build-*/
 *.out
 .vscode/
 .idea/
+build_cmake/
