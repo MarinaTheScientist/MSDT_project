@@ -179,3 +179,83 @@ Errors while running CTest
 
 ОШИБКА: тесты не прошли, коммит отменён.
 ```
+
+```git
+penis_xxxl@DESKTOP-3C78S1M:/mnt/c/Users/Penis XXXL/Desktop/my_project$ git log --oneline --graph -8
+*   a0711e8 (HEAD -> dev) Merge feature-test into dev
+|\  
+| * 5f72eae (feature-test) fix: восстановить корректную реализацию get_width
+| * c1cb704 feat: настройка CMake, тестов и отчётов
+| * 356b7a0 test: правка для демонстрации слияния
+|/  
+* 770b713 test: тест хука для дева
+:
+```
+*Граф истории: ветка `feature-test` ответвилась от `dev`, получила три коммита и была влита обратно коммитом слияния `a0711e8`.*
+
+```git
+penis_xxxl@DESKTOP-3C78S1M:/mnt/c/Users/Penis XXXL/Desktop/my_project$ echo "// проверка post-commit" >> labs/lab1/src/barrel.cpp
+git add labs/lab1/src/barrel.cpp
+git commit -m "test: проверка хука сборки библиотеки"
+Ветка dev: запускаю тесты...
+Test project /mnt/c/Users/Penis XXXL/Desktop/my_project/labs/lab1/build_cmake
+    Start 1: rect_basic_methods
+1/4 Test #1: rect_basic_methods ...............   Passed    0.00 sec
+    Start 2: rect_properties
+2/4 Test #2: rect_properties ..................   Passed    0.00 sec
+    Start 3: rect_operations
+3/4 Test #3: rect_operations ..................   Passed    0.00 sec
+    Start 4: bounding_rect
+4/4 Test #4: bounding_rect ....................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.06 sec
+Тесты пройдены.
+Проверка сообщения коммита пройдена.
+Ветка dev: собираю библиотеку...
+[100%] Built target lab1lib
+Библиотека собрана:
+-rwxrwxrwx 1 penis_xxxl penis_xxxl 32K Sep 12 20:46 build_cmake/liblab1lib.a
+[dev 23ff424] test: проверка хука сборки библиотеки
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+*Все три хука срабатывают за один коммит: тесты, проверка сообщения, сборка библиотеки.*
+
+## Автоматизация с помощью Github Actions
+### Синтаксис YAML
+
+YAML (YAML Ain't Markup Language) — формат записи структурированных данных, рассчитанный на удобство чтения человеком.
+
+Пары ключ-значение — основная конструкция:
+```yaml
+name: CI
+version: 1.0
+enabled: true
+```
+Вложенность задаётся отступами, как в Python. Табуляция запрещена, только пробелы:
+```yaml
+job:
+  name: build
+  runs-on: ubuntu-latest
+```
+Списки — дефис с пробелом в начале строки:
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - name: Build
+    run: cmake --build build
+```
+
+### Возможности GitHub Actions и тарифы
+
+Основные понятия:
+
+- Workflow — автоматизированный процесс, описанный YAML-файлом в каталоге `.github/workflows/`. Репозиторий может содержать несколько.
+- Event — событие-триггер: `push`, `pull request`, создание релиза, расписание по `cron`, ручной запуск.
+- Job — набор шагов, выполняемых на одном раннере. По умолчанию задания идут параллельно; зависимости задаются через `needs`.
+- Step — отдельная операция: либо shell-команда (run), либо готовое действие (uses).
+- Action — переиспользуемый компонент. Существует маркетплэйс с тысячами готовых: `actions/checkout` для получения кода, `actions/setup-python`, `actions/upload-artifact` и другие.
+
+![Screenshot_1022.png](imgs/Screenshot_1022.png)
+*Успешное выполнение CI-пайплайна: GitHub скачал репозиторий, сконфигурировал проект через CMake, собрал его, прогнал тесты и отдельно собрал библиотеку.*
