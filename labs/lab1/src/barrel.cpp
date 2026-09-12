@@ -24,4 +24,4 @@ void Barrel::pour_from(Barrel &sourse){
     alcohol_vol += alc_cup;
     water_vol += wat_cup;
     volume += amount;
-}
+}// проверка post-commit
