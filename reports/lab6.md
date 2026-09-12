@@ -65,11 +65,66 @@ pandoc report.md -s -o report.html
 ![Screenshot_1015.png](imgs/Screenshot_1015.png)
 *Сконвертировалось*
 
+Хукецкий:
+````git
+#!/bin/bash
 
+BRANCH="lab6"
+REPO_DIR="$HOME/Desktop/server_repo.git"
+OUT_DIR="$HOME/Desktop/html_output"
 
+while read oldrev newrev refname; do
+    if [ "$refname" = "refs/heads/$BRANCH" ]; then
+        echo "Получены изменения в ветке $BRANCH, собираю HTML..."
 
+        mkdir -p "$OUT_DIR"
 
+        git --git-dir="$REPO_DIR" show "$BRANCH:reports/lab6.md" > /tmp/lab6.md
 
+        pandoc /tmp/lab6.md -s -o "$OUT_DIR/lab6.html"
 
-## Проверка работы хука
-## Ещё один раздел
+        echo "Готово: $OUT_DIR/lab6.html"
+    fi
+done
+````
+![Screenshot_1016.png](imgs/Screenshot_1016.png)
+*Сконвертировалось*
+
+![Screenshot_1017.png](imgs/Screenshot_1017.png)
+*Сконвертировалось*
+
+## Сборка с помощью CMake
+
+CMake - генератор систем сборки. Make описывает конкретные команды компиляции для конкретной системы, поэтому Makefile, написанный под Linux и g++, не соберёт проект в Windows под MSVC. CMake работает уровнем выше: программист описывает структуру проекта — какие есть библиотеки, исполняемые файлы и связи между ними, — а CMake сам генерирует файлы сборки под текущую платформу: Makefile в Linux, проект Visual Studio в Windows, файлы Ninja где угодно.
+
+Проект — верхний уровень описания, объявляется в корневом файле:
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(Lab1 VERSION 1.0 LANGUAGES CXX)
+```
+*Первая строка задаёт минимальную версию CMake и обязательна. Вторая объявляет имя проекта, версию и используемые языки (`CXX` означает C++).*
+
+Цель (target) — то, что требуется построить. Целью может быть библиотека, исполняемый файл или служебное действие. Современный подход к CMake строится именно вокруг целей: все свойства — флаги, пути, зависимости — назначаются конкретной цели, а не всему проекту сразу.
+
+Исполняемый файл:
+
+```cmake
+add_executable(lab1 src/lab1.cpp)
+```
+Библиотека:
+```cmake
+add_library(lab1lib STATIC src/rect.cpp src/matrix.cpp)
+```
+*Второй аргумент задаёт тип: STATIC — статическая (код встраивается в программу при линковке), SHARED — динамическая (подключается во время выполнения), INTERFACE — без собственного кода, только заголовки.*
+
+![Screenshot_1018.png](imgs/Screenshot_1018.png)
+*Сконвертировалось*
+![Screenshot_1019.png](imgs/Screenshot_1019.png)
+*Сконвертировалось*
+![Screenshot_1020.png](imgs/Screenshot_1020.png)
+*Сконвертировалось*
+![Screenshot_1021.png](imgs/Screenshot_1021.png)
+*Сконвертировалось*
+
+## Автоматизация задач CMake в git
+
