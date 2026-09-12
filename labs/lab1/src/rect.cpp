@@ -177,7 +177,7 @@ void print_rect(Rect &r){
 //     return this->right - this->left;
 // }
 int Rect::get_width(){
-    return 999;
+    return width;
 }
 
 // int Rect::get_height(){
