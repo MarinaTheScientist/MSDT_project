@@ -1,5 +1,3 @@
-mkdir -p .github/workflows
-cat > .github/workflows/cmake.yml << 'EOF'
 name: CMake Build and Test
 
 on:
@@ -11,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,4 +28,3 @@ jobs:
       - name: Build library only
         run: cmake --build build_cmake --target lab1lib
         working-directory: labs/lab1
-EOF
