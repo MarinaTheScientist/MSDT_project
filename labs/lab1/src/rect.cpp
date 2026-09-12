@@ -205,4 +205,5 @@ void Rect::set_width(int width){
 void Rect::set_height(int height){
     this->height = height; 
 }
-    
+    // комментарий
+// комментарий для проверки хука

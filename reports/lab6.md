@@ -128,3 +128,54 @@ add_library(lab1lib STATIC src/rect.cpp src/matrix.cpp)
 
 ## Автоматизация задач CMake в git
 
+Добавил хук.
+
+Проверка хука:
+```penis_xxxl@DESKTOP-3C78S1M:/mnt/c/Users/Penis XXXL/Desktop/my_project$ git commit -m "test: тест хука для дева"
+Ветка dev: запускаю тесты...
+Test project /mnt/c/Users/Penis XXXL/Desktop/my_project/labs/lab1/build_cmake
+    Start 1: rect_basic_methods
+1/4 Test #1: rect_basic_methods ...............   Passed    0.00 sec
+    Start 2: rect_properties
+2/4 Test #2: rect_properties ..................   Passed    0.00 sec
+    Start 3: rect_operations
+3/4 Test #3: rect_operations ..................   Passed    0.00 sec
+    Start 4: bounding_rect
+4/4 Test #4: bounding_rect ....................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.04 sec
+Тесты пройдены.
+Проверка сообщения коммита пройдена.
+[dev 770b713] test: тест хука для дева
+ 2 files changed, 2 insertions(+), 249 deletions(-)
+ delete mode 100644 lab6.html
+```
+Если проверка не пройдена:
+```Ветка dev: запускаю тесты...
+Test project /mnt/c/Users/Penis XXXL/Desktop/my_project/labs/lab1/build_cmake
+    Start 1: rect_basic_methods
+1/4 Test #1: rect_basic_methods ...............   Passed    0.00 sec
+    Start 2: rect_properties
+2/4 Test #2: rect_properties ..................Subprocess aborted***Exception:   0.00 sec
+test_rect_properties: /mnt/c/Users/Penis XXXL/Desktop/my_project/labs/lab1/tests/test_rect_properties.cpp:9: int main(): Assertion `r.get_width() == 6' failed.
+
+    Start 3: rect_operations
+3/4 Test #3: rect_operations ..................Subprocess aborted***Exception:   0.00 sec
+test_rect_operations: /mnt/c/Users/Penis XXXL/Desktop/my_project/labs/lab1/tests/test_rect_operations.cpp:14: int main(): Assertion `r.get_width() == 6' failed.
+
+    Start 4: bounding_rect
+4/4 Test #4: bounding_rect ....................   Passed    0.00 sec
+
+50% tests passed, 2 tests failed out of 4
+
+Total Test time (real) =   0.05 sec
+
+The following tests FAILED:
+          2 - rect_properties (Subprocess aborted)
+          3 - rect_operations (Subprocess aborted)
+Errors while running CTest
+
+ОШИБКА: тесты не прошли, коммит отменён.
+```

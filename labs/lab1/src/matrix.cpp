@@ -101,3 +101,4 @@ Matrix Matrix::multiply(Matrix &other){
 }
 
 
+// правка для демонстрации merge
