@@ -1,3 +1,5 @@
+#pragma once
+
 class Rect{
     private:
     int x, y, width, height;
@@ -22,7 +24,7 @@ class Rect{
     void inflate(int dw, int dh);
     void inflate(int d_bottom, int d_top, int d_left, int d_right);
 
-    void move(int dx, int dy);
+    void move(int dx, int dy = 0);
 
     int get_width();
     int get_height();

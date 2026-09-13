@@ -47,11 +47,11 @@ void MyString::print(){
 void MyString::read_line(){
     delete[] str;
     int n = 10;
-    char c = ' ';
     char *str = new char[n];
     int i = 0;
 
-    while ((c = getchar()) != '\n')
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
     {
         str[i++] = c;
 
