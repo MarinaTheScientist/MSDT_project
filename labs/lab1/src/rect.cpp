@@ -129,7 +129,7 @@ void Rect::inflate(int d_bottom, int d_top, int d_left, int d_right){
 //     this->left += dx;
 //     this->right += dx;
 // }
-void Rect::move(int dx, int dy = 0){
+void Rect::move(int dx, int dy){
     this->x += dx;
     this->y += dy;
 }
