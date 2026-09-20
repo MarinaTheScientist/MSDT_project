@@ -1,0 +1,38 @@
+#pragma once
+
+#include <cstdio>
+
+#include "ifile.hpp"
+
+class BaseFile : public IFile {
+    FILE *f;
+    bool readable;
+    bool writable;
+    bool owns;
+
+public:
+    BaseFile();
+
+    BaseFile(const char *path, const char *mode);
+
+    BaseFile(FILE *file, bool can_r = true, bool can_w = true);
+
+    ~BaseFile() override;
+
+    bool is_open() const;
+    bool can_read() const override;
+    bool can_write() const override;
+
+    void close();
+
+    size_t write_raw(const void *buf, size_t n_bytes);
+
+    size_t read_raw(void *buf, size_t max_bytes);
+
+    long tell() const;
+
+    bool seek(long offset);
+
+    size_t write(const void *buf, size_t n_bytes) override;
+    size_t read(void *buf, size_t max_bytes) override;
+};
